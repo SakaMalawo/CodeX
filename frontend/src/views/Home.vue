@@ -1,125 +1,171 @@
 <template>
-  <div
-    class="min-h-screen w-full flex flex-col md:flex-row bg-black font-sans relative"
-  >
-    <!-- Branding (3/4) -->
-    <div
-      class="flex flex-col items-center justify-center md:justify-center flex-[3_1_0%] md:h-screen h-auto md:min-h-0 min-h-[320px] w-full md:py-0 py-8"
-      id="logoS"
-    >
-      <div
-        class="flex flex-col items-center justify-center gap-10 mb-6 mt-6 w-full md:gap-10 md:mb-6 md:mt-6 sm:gap-3 sm:mb-2 sm:mt-0"
-      >
-        <div class="flex flex-col items-center gap-2 sm:gap-1">
-          <img src="/logoHay.png" alt="Logo HAY" class="w-[200px] h-[200px] md:w-[220px] md:h-[220px] sm:w-[32px] sm:h-[32px] object-contain drop-shadow-[0_0_24px_#2196f3aa] z-10 sm:mt-2" />
-        </div>
-        <span
-          id="titleL"
-          class="text-white font-bold tracking-widest text-[58px] md:text-[38px] sm:text-base mt-2 md:mt-6 sm:mt-2 whitespace-nowrap z-20 drop-shadow-[0_2px_16px_#39ff14,0_2px_16px_#2196f3]"
-        >
-          HAY
-        </span>
-      </div>
+  <div class="min-h-screen w-full flex bg-gradient-to-r from-green-200 via-white to-white font-sans">
+    <!-- Branding à gauche -->
+    <div class="flex flex-col justify-center items-center flex-1 bg-gradient-to-b from-blue-700 via-black to-blue-900 text-white px-10 py-12 shadow-2xl shadow-black">
+      <img src="/logoHay.png" alt="Logo" class="w-48 h-48 mb-6 drop-shadow-lg" />
+      <h1 class="text-4xl font-bold mb-4">BIENVENUE SUR HAY<br /></h1>
+      <p class="text-lg opacity-90 max-w-xs">
+        Découvrez nos formations et accédez à la connaissance depuis chez vous !
+      </p>
+      <ul class="mt-8 text-left text-base opacity-90 max-w-xs list-disc pl-5 space-y-2">
+        <li>Mathématiques, Sciences, Langues</li>
+        <li>Cours en ligne interactifs</li>
+        <li>Suivi personnalisé</li>
+        <li>Pour tous les niveaux</li>
+      </ul>
     </div>
-
-    <!-- Login (1/4) -->
-    <section class="hay_log">
-      <div
-        class="flex flex-col justify-center items-center flex-1 w-full md:max-w-[420px] bg-[#181c24] md:rounded-none rounded-t-2xl md:h-screen h-auto md:min-h-0 min-h-[320px] p-8 md:p-10 sm:p-4 text-center shadow-2xl sm:rounded-none sm:shadow-none sm:border-t sm:border-[#232a36] sm:pt-6 sm:pb-8 sm:px-2"
-      >
-        <h2 class="text-white text-2xl font-semibold mb-8 sm:text-base sm:mb-4">
-          Connexion à Hay
-        </h2>
-        <form
-          @submit.prevent="handleLogin"
-          class="w-full flex flex-col gap-5 sm:gap-3 max-w-md mx-auto"
-        >
-          <div class="flex flex-col items-start w-full">
-            <label
-              for="email"
-              class="text-gray-400 text-base mb-2 sm:text-xs sm:mb-1"
-              >Adresse e-mail</label
+    <!-- Formulaire à droite -->
+    <div class="flex flex-col justify-center items-center flex-1 px-8 py-12">
+      <div class="w-full max-w-3xl bg-white rounded-2xl shadow-2xl p-12">
+        <!-- Onglets -->
+        <div class="flex mb-6">
+          <button
+            @click="activeTab = 'login'"
+            :class=" [
+              'flex-1 py-2 rounded-l-lg font-semibold transition',
+              activeTab === 'login'
+                ? 'bg-blue-600 text-white shadow'
+                : 'bg-gray-100 text-gray-600 hover:bg-blue-50'
+            ]"
+          >
+            Connexion
+          </button>
+          <button
+            @click="activeTab = 'register'"
+            :class=" [
+              'flex-1 py-2 rounded-r-lg font-semibold transition',
+              activeTab === 'register'
+                ? 'bg-blue-600 text-white shadow'
+                : 'bg-gray-100 text-gray-600 hover:bg-blue-50'
+            ]"
+          >
+            Inscription
+          </button>
+        </div>
+        <!-- Formulaire de connexion -->
+        <form v-if="activeTab === 'login'" @submit.prevent="handleLogin" class="flex flex-col gap-4">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Sign In</h2>
+          <div class="h-1 w-12 bg-blue-600 rounded mb-6"></div>
+          <label class="block text-gray-600 mb-2">Veuillez sélectionner votre rôle</label>
+          <div class="flex justify-between mb-6">
+            <button
+              v-for="role in roles"
+              :key="role.value"
+              @click="selectedRole = role.value"
+              type="button"
+              :class=" [
+                'flex-1 mx-1 py-3 rounded-lg border text-center transition',
+                selectedRole === role.value
+                  ? 'border-blue-600 bg-blue-50 text-blue-700 font-semibold shadow'
+                  : 'border-gray-200 bg-gray-50 text-gray-500 hover:border-blue-300'
+              ]"
             >
+              <span class="block text-2xl mb-1">{{ role.icon }}</span>
+              <span class="block text-xs uppercase tracking-widest">{{ role.label }}</span>
+              <span v-if="selectedRole === role.value" class="block text-blue-600 text-lg mt-1">✔</span>
+            </button>
+          </div>
+          <div>
+            <label for="email" class="block text-gray-600 mb-1">EMAIL</label>
             <input
               type="email"
               id="email"
               v-model="email"
               required
               autocomplete="username"
-              placeholder="ex: example@example.com"
-              class="w-full px-4 py-3 sm:px-3 sm:py-2 rounded-lg border border-[#232a36] bg-[#232a36] text-white text-base sm:text-sm outline-none transition duration-200 focus:bg-[#283040] focus:border-[#39ff14]"
+              placeholder="Type your Email"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 outline-none focus:border-green-500 transition"
             />
           </div>
-          <div class="flex flex-col items-start w-full">
-            <label
-              for="password"
-              class="text-gray-400 text-base mb-2 sm:text-xs sm:mb-1"
-              >Mot de passe</label
-            >
+          <div>
+            <label for="password" class="block text-gray-600 mb-1">PASSWORD</label>
             <input
               type="password"
               id="password"
               v-model="password"
               required
               autocomplete="current-password"
-              placeholder="Votre mot de passe"
-              class="w-full px-4 py-3 sm:px-3 sm:py-2 rounded-lg border border-[#232a36] bg-[#232a36] text-white text-base sm:text-sm outline-none transition duration-200 focus:bg-[#283040] focus:border-[#39ff14]"
+              placeholder="Type your password"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 outline-none focus:border-green-500 transition"
             />
-          </div>
-          <div
-            class="flex justify-between items-center w-full text-sm sm:text-xs text-gray-400"
-          >
-            <label class="flex items-center gap-2">
-              <input
-                type="checkbox"
-                v-model="remember"
-                class="accent-[#39ff14]"
-              />
-              Se souvenir de moi
-            </label>
-            <a
-              href="#"
-              class="text-[#39ff14] hover:text-[#00ffa3] transition-colors"
-              >Mot de passe oublié ?</a
-            >
           </div>
           <button
             type="submit"
-            class="w-full py-3 sm:py-2 bg-[#24292f] text-white text-lg sm:text-base font-semibold rounded-xl mb-5 sm:mb-3 cursor-pointer transition-colors duration-200 shadow-lg hover:bg-[#333940]"
+            class="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg mt-2 shadow hover:bg-blue-700 transition"
           >
-            Se connecter
+            Login
           </button>
-          <p
-            v-if="errorMessage"
-            class="text-red-500 text-base sm:text-sm text-center mb-2"
-          >
+          <p v-if="errorMessage" class="text-red-500 text-center text-sm mt-2">
             {{ errorMessage }}
           </p>
+          <div class="flex justify-between items-center mt-4 text-sm text-gray-400">
+            <span></span>
+            <a href="#" class="hover:underline text-gray-500">Mot de passe oublié ?</a>
+          </div>
         </form>
-        <div
-          class="text-gray-400 text-base sm:text-xs text-center mt-6 sm:mt-2 w-full"
-        >
-          Pas encore de compte ?
-          <a
-            href="#"
-            class="text-[#39ff14] hover:text-[#00ffa3] ml-1 transition-colors"
-            >Inscription</a
+        <!-- Formulaire d'inscription -->
+        <form v-else @submit.prevent="handleRegister" class="flex flex-col gap-4">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Créer un compte</h2>
+          <div class="h-1 w-12 bg-blue-600 rounded mb-6"></div>
+          <div>
+            <label for="registerName" class="block text-gray-600 mb-1">NOM COMPLET</label>
+            <input
+              type="text"
+              id="registerName"
+              v-model="registerName"
+              required
+              placeholder="Votre nom complet"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 outline-none focus:border-green-500 transition"
+            />
+          </div>
+          <div>
+            <label for="registerEmail" class="block text-gray-600 mb-1">EMAIL</label>
+            <input
+              type="email"
+              id="registerEmail"
+              v-model="registerEmail"
+              required
+              autocomplete="username"
+              placeholder="Votre email"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 outline-none focus:border-green-500 transition"
+            />
+          </div>
+          <div>
+            <label for="registerPassword" class="block text-gray-600 mb-1">MOT DE PASSE</label>
+            <input
+              type="password"
+              id="registerPassword"
+              v-model="registerPassword"
+              required
+              autocomplete="new-password"
+              placeholder="Votre mot de passe"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 outline-none focus:border-green-500 transition"
+            />
+          </div>
+          <div>
+            <label for="registerConfirmPassword" class="block text-gray-600 mb-1">CONFIRMER LE MOT DE PASSE</label>
+            <input
+              type="password"
+              id="registerConfirmPassword"
+              v-model="registerConfirmPassword"
+              required
+              autocomplete="new-password"
+              placeholder="Confirmez votre mot de passe"
+              class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-800 outline-none focus:border-green-500 transition"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg mt-2 shadow hover:bg-blue-700 transition"
           >
-        </div>
+            S'inscrire
+          </button>
+          <p v-if="registerErrorMessage" class="text-red-500 text-center text-sm mt-2">
+            {{ registerErrorMessage }}
+          </p>
+        </form>
       </div>
-    </section>
-
-    <!-- Description en bas sur mobile -->
-    <span
-      class="hidden sm:block absolute bottom-3 left-0 w-full text-white text-xs text-center max-w-[90vw] opacity-85 drop-shadow-[0_2px_8px_#0a0a0a] px-2"
-    >
-      La plateforme d'apprentissage moderne et interactive.
-    </span>
-    <span
-      class="block sm:hidden fixed bottom-3 left-0 w-full text-white text-xs text-center max-w-[90vw] opacity-85 drop-shadow-[0_2px_8px_#0a0a0a] px-2 z-50"
-    >
-      La plateforme d'apprentissage moderne et interactive.
-    </span>
+    </div>
   </div>
 </template>
 
@@ -128,10 +174,25 @@ export default {
   name: "Home",
   data() {
     return {
+      // Onglet actif
+      activeTab: "login",
+      // Login
       email: "",
       password: "",
-      remember: false,
+      selectedRole: "tutor",
       errorMessage: "",
+      // Register
+      registerName: "",
+      registerEmail: "",
+      registerPassword: "",
+      registerConfirmPassword: "",
+      registerErrorMessage: "",
+      // Roles
+      roles: [
+        { value: "student", label: "Étudiant", icon: "🎓" },
+        { value: "tutor", label: "Professeur", icon: "👨‍🏫" },
+        { value: "parent", label: "Nouvel Étudiant", icon: "🆕" },
+      ],
     };
   },
   methods: {
@@ -150,30 +211,26 @@ export default {
         this.errorMessage = "Identifiants incorrects !";
       }
     },
+    handleRegister() {
+      if (this.registerPassword !== this.registerConfirmPassword) {
+        this.registerErrorMessage = "Les mots de passe ne correspondent pas.";
+        return;
+      }
+      if (!this.registerName || !this.registerEmail || !this.registerPassword) {
+        this.registerErrorMessage = "Veuillez remplir tous les champs.";
+        return;
+      }
+      // Ici, tu peux ajouter la logique d'inscription (API, etc.)
+      this.registerErrorMessage = "";
+      // Redirection après inscription réussie (exemple)
+      this.$router.push("/AppPage");
+    },
   },
 };
 </script>
 
 <style scoped>
-@media (min-width: 500px) {
-  * {
-    size: inherit;
-  }
-  .hay_log {
-    width: 400px;
-    height: initial;
-    margin: 20px;
-  }
-}
-@media (max-width: 470px) {
-  #titleL {
-    margin-top: -135px;
-  }
-}
-.hay_log {
-  position: relative;
-  top: -100px;
-  padding: 5px;
-  margin: 5px;
+body {
+  background: #f0f4f8;
 }
 </style>
