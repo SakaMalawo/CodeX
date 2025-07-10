@@ -1,0 +1,2 @@
+git # Ignore Python virtual environments
+ia_assist/venv-rasa/
