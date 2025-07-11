@@ -1,28 +1,23 @@
 <template>
-  <div class="min-h-screen w-full flex bg-gradient-to-r from-green-200 via-white to-white font-sans">
+  <div class="min-h-screen md:h-screen w-full flex flex-col md:flex-row bg-gradient-to-r from-green-200 via-white to-white font-sans overflow-hidden">
     <!-- Branding à gauche -->
-    <div class="flex flex-col justify-center items-center flex-1 bg-gradient-to-b from-blue-700 via-black to-blue-900 text-white px-10 py-12 shadow-2xl shadow-black">
-      <img src="/logoHay.png" alt="Logo" class="w-48 h-48 mb-6 drop-shadow-lg" />
-      <h1 class="text-4xl font-bold mb-4">BIENVENUE SUR HAY<br /></h1>
-      <p class="text-lg opacity-90 max-w-xs">
+    <div class="flex flex-col justify-center items-center flex-1 h-1/2 md:h-full bg-gradient-to-b from-blue-700 via-black to-blue-900 text-white px-4 py-6 md:px-10 md:py-12 shadow-2xl shadow-black text-center">
+      <img src="/logoHay.png" alt="Logo" class="w-40 h-40 md:w-96 md:h-96 mb-4 drop-shadow-lg" />
+      <h1 class="text-3xl md:text-6xl font-bold mb-2">BIENVENUE SUR HAY</h1>
+      <p class="text-base md:text-xl opacity-90 max-w-xs md:max-w-md">
         Découvrez nos formations et accédez à la connaissance depuis chez vous !
       </p>
-      <ul class="mt-8 text-left text-base opacity-90 max-w-xs list-disc pl-5 space-y-2">
-        <li>Mathématiques, Sciences, Langues</li>
-        <li>Cours en ligne interactifs</li>
-        <li>Suivi personnalisé</li>
-        <li>Pour tous les niveaux</li>
-      </ul>
     </div>
+
     <!-- Formulaire à droite -->
-    <div class="flex flex-col justify-center items-center flex-1 px-8 py-12">
-      <div class="w-full max-w-3xl bg-white rounded-2xl shadow-2xl p-12">
+    <div class="flex flex-col justify-center items-center flex-1 h-1/2 md:h-full px-4 py-6 md:px-8 md:py-12 overflow-y-auto">
+      <div class="w-full max-w-full md:max-w-3xl bg-white rounded-2xl shadow-2xl p-4 md:p-12">
         <!-- Onglets -->
-        <div class="flex mb-6">
+        <div class="flex flex-col sm:flex-row mb-6">
           <button
             @click="activeTab = 'login'"
-            :class=" [
-              'flex-1 py-2 rounded-l-lg font-semibold transition',
+            :class="[
+              'flex-1 py-2 rounded-t-lg sm:rounded-l-lg sm:rounded-tr-none font-semibold transition',
               activeTab === 'login'
                 ? 'bg-blue-600 text-white shadow'
                 : 'bg-gray-100 text-gray-600 hover:bg-blue-50'
@@ -32,8 +27,8 @@
           </button>
           <button
             @click="activeTab = 'register'"
-            :class=" [
-              'flex-1 py-2 rounded-r-lg font-semibold transition',
+            :class="[
+              'flex-1 py-2 rounded-b-lg sm:rounded-r-lg sm:rounded-bl-none font-semibold transition',
               activeTab === 'register'
                 ? 'bg-blue-600 text-white shadow'
                 : 'bg-gray-100 text-gray-600 hover:bg-blue-50'
@@ -42,29 +37,12 @@
             Inscription
           </button>
         </div>
+
         <!-- Formulaire de connexion -->
         <form v-if="activeTab === 'login'" @submit.prevent="handleLogin" class="flex flex-col gap-4">
-          <h2 class="text-2xl font-bold text-gray-800 mb-2">Sign In</h2>
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Se connecter</h2>
           <div class="h-1 w-12 bg-blue-600 rounded mb-6"></div>
-          <label class="block text-gray-600 mb-2">Veuillez sélectionner votre rôle</label>
-          <div class="flex justify-between mb-6">
-            <button
-              v-for="role in roles"
-              :key="role.value"
-              @click="selectedRole = role.value"
-              type="button"
-              :class=" [
-                'flex-1 mx-1 py-3 rounded-lg border text-center transition',
-                selectedRole === role.value
-                  ? 'border-blue-600 bg-blue-50 text-blue-700 font-semibold shadow'
-                  : 'border-gray-200 bg-gray-50 text-gray-500 hover:border-blue-300'
-              ]"
-            >
-              <span class="block text-2xl mb-1">{{ role.icon }}</span>
-              <span class="block text-xs uppercase tracking-widest">{{ role.label }}</span>
-              <span v-if="selectedRole === role.value" class="block text-blue-600 text-lg mt-1">✔</span>
-            </button>
-          </div>
+
           <div>
             <label for="email" class="block text-gray-600 mb-1">EMAIL</label>
             <input
@@ -98,15 +76,36 @@
           <p v-if="errorMessage" class="text-red-500 text-center text-sm mt-2">
             {{ errorMessage }}
           </p>
-          <div class="flex justify-between items-center mt-4 text-sm text-gray-400">
-            <span></span>
+          <div class="flex justify-end items-center mt-4 text-sm text-gray-400">
             <a href="#" class="hover:underline text-gray-500">Mot de passe oublié ?</a>
           </div>
         </form>
+
         <!-- Formulaire d'inscription -->
         <form v-else @submit.prevent="handleRegister" class="flex flex-col gap-4">
           <h2 class="text-2xl font-bold text-gray-800 mb-2">Créer un compte</h2>
           <div class="h-1 w-12 bg-blue-600 rounded mb-6"></div>
+
+          <label class="block text-gray-600 mb-2">Veuillez sélectionner votre rôle</label>
+          <div class="flex flex-col sm:flex-row justify-between mb-6 gap-2 sm:gap-0">
+            <button
+              v-for="role in roles"
+              :key="role.value"
+              @click="selectedRole = role.value"
+              type="button"
+              :class="[
+                'flex-1 py-3 rounded-lg border text-center transition',
+                selectedRole === role.value
+                  ? 'border-blue-600 bg-blue-50 text-blue-700 font-semibold shadow'
+                  : 'border-gray-200 bg-gray-50 text-gray-500 hover:border-blue-300'
+              ]"
+            >
+              <span class="block text-2xl mb-1">{{ role.icon }}</span>
+              <span class="block text-xs uppercase tracking-widest">{{ role.label }}</span>
+              <span v-if="selectedRole === role.value" class="block text-blue-600 text-lg mt-1">✔</span>
+            </button>
+          </div>
+
           <div>
             <label for="registerName" class="block text-gray-600 mb-1">NOM COMPLET</label>
             <input
@@ -174,20 +173,16 @@ export default {
   name: "Home",
   data() {
     return {
-      // Onglet actif
       activeTab: "login",
-      // Login
       email: "",
       password: "",
       selectedRole: "tutor",
       errorMessage: "",
-      // Register
       registerName: "",
       registerEmail: "",
       registerPassword: "",
       registerConfirmPassword: "",
       registerErrorMessage: "",
-      // Roles
       roles: [
         { value: "student", label: "Étudiant", icon: "🎓" },
         { value: "tutor", label: "Professeur", icon: "👨‍🏫" },
@@ -197,15 +192,11 @@ export default {
   },
   methods: {
     handleLogin() {
-      // Contrôle 100% frontend, sans appel Axios
       const superUser = {
         username: "saka@hay.com",
         password: "1234",
       };
-      if (
-        this.email === superUser.username &&
-        this.password === superUser.password
-      ) {
+      if (this.email === superUser.username && this.password === superUser.password) {
         this.$router.push("/AppPage");
       } else {
         this.errorMessage = "Identifiants incorrects !";
@@ -220,10 +211,17 @@ export default {
         this.registerErrorMessage = "Veuillez remplir tous les champs.";
         return;
       }
-      // Ici, tu peux ajouter la logique d'inscription (API, etc.)
       this.registerErrorMessage = "";
-      // Redirection après inscription réussie (exemple)
-      this.$router.push("/AppPage");
+
+      // Passe à l'onglet connexion
+      this.activeTab = "login";
+
+      // Réinitialiser les champs d'inscription
+      this.registerName = "";
+      this.registerEmail = "";
+      this.registerPassword = "";
+      this.registerConfirmPassword = "";
+      this.selectedRole = "tutor";
     },
   },
 };
