@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #1e3a8a; /* Bleu foncé */
+  --secondary-color: #3b82f6; /* Bleu vif */
+  --text-color: #ffffff; /* Texte blanc */
+  --font-family: "Inter", sans-serif;
+}
+
+body.dark, .dark body {
+  background-color: #10192b !important;
+}
