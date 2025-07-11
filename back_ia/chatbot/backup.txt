@@ -1,0 +1,35 @@
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()  #ity ny chragement an'ilay fichier .env 
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+print("🤖 Bonjour, je suis Haybot !")
+print("Pose-moi une question dans n’importe quelle matière scolaire.")
+print("Tape 'exit' pour quitter.\n")
+
+history = []
+
+while True:
+    user_input = input("Ta question : ")
+
+    if user_input.lower() in ["exit", "quit"]:
+        print("👋 À bientôt !")
+        break
+
+    response = client.chat.completions.create(
+        model="gpt-4",  
+        messages=[
+            {"role": "system", "content": "Tu t'appelles Haybot et tu n'es pas un professeur mais un collègue patient et pédagogue qui aide les élèves et les étudiants. Réponds avec des explications claires et detaillées adaptées aux élèves."},
+            *history,
+            {"role": "user", "content": user_input}
+        ]
+    )
+
+    answer = response.choices[0].message.content
+    print(f"\n🤖 Haybot :", answer, "\n")
+
+    history.append({"role": "user", "content": user_input})
+    history.append({"role": "assistant", "content": answer})

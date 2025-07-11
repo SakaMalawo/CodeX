@@ -115,7 +115,7 @@ export default {
           route = "/cours";
           break;
         case "services":
-          route = "/services";
+          route = "/generate";
           break;
         case "forum":
           route = "/forum";

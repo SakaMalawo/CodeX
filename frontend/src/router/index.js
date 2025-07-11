@@ -7,6 +7,7 @@ import Dashboard from "../views/Dashboard.vue";
 import Message from "../views/Message.vue";
 import Cours from "../views/cours/cours.vue";
 import Exercices from "../views/exercises/exercices.vue";
+import Generate from "../components/Generate.vue";
 
 const routes = [
   { path: "/Home", name: "Home", component: Home },
@@ -15,6 +16,7 @@ const routes = [
   { path: "/Message", name: "Message", component: Message },
   { path: "/cours", name: "Cours", component: Cours },
   { path: "/exercices", name: "Exercices", component: Exercices },
+  { path: "/generate", name: "Generate", component: Generate },
   { path: "/exercices/probabilites", name: "ExercicesProbabilites", component: () => import("../views/exercises/probabilites.vue") },
   { path: "/exercices/statistiques", name: "ExercicesStatistiques", component: () => import("../views/exercises/statistiques.vue") },
   { path: "/exercices/matrices", name: "ExercicesMatrices", component: () => import("../views/exercises/matrices.vue") },

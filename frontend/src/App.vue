@@ -11,7 +11,7 @@
             <component :is="Component" :darkMode="darkMode" />
           </router-view>
         </main>
-        <Citra :dark="darkMode" />
+        <Haybot />
       </div>
     </template>
     <template v-else>
@@ -23,9 +23,9 @@
 <script>
 import MainNavbar from "./components/MainNavbar.vue";
 import MainSidebar from "./components/MainSidebar.vue";
-import Citra from "./components/Citra.vue";
+import Haybot from "./components/Haybot.vue";
 export default {
-  components: { MainNavbar, MainSidebar, Citra },
+  components: { MainNavbar, MainSidebar, Haybot },
   data() {
     return {
       darkMode: false,
