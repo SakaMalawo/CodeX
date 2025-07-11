@@ -12,7 +12,7 @@ const routes = [
   { path: "/Home", name: "Home", component: Home },
   { path: "/AppPage", name: "AppPage", component: AppPage },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
-  { path: "/message", name: "Message", component: Message },
+  { path: "/Message", name: "Message", component: Message },
   { path: "/cours", name: "Cours", component: Cours },
   { path: "/exercices", name: "Exercices", component: Exercices },
   { path: "/exercices/probabilites", name: "ExercicesProbabilites", component: () => import("../views/exercises/probabilites.vue") },
