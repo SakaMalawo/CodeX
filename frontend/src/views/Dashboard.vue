@@ -219,11 +219,7 @@ export default {
         "Nouveau message",
         "Cours Symfony à venir",
       ],
-<<<<<<< HEAD
       months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
-=======
-      months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin"],
->>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       selectedMonth: "Juin",
       bestLesson: { percent: 92, module: "Vue.js" },
       performances: [
