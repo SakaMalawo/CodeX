@@ -5,7 +5,7 @@
       <img src="/logoHay.png" alt="Logo" class="w-40 h-40 md:w-96 md:h-96 mb-4 drop-shadow-lg" />
       <h1 class="text-3xl md:text-6xl font-bold mb-2">BIENVENUE SUR HAY</h1>
       <p class="text-base md:text-xl opacity-90 max-w-xs md:max-w-md">
-        Découvrez nos formations et accédez à la connaissance depuis chez vous !
+        Découvrez nos études en ligne et accédez à la connaissance depuis chez vous !
       </p>
     </div>
 
