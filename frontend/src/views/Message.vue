@@ -2,6 +2,7 @@
   <div class="flex h-screen" :class="{ 'bg-gray-900': darkMode, 'bg-gray-100': !darkMode }">
     <!-- Sidebar des conversations -->
     <div class="w-1/4 border-r" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
+<<<<<<< HEAD
       <div class="p-4 border-b flex justify-between items-center" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
         <h2 class="text-xl font-bold flex items-center" :class="{ 'text-white': darkMode, 'text-gray-800': !darkMode }">
           Messages
@@ -31,6 +32,15 @@
       </div>
       
       <div class="h-[calc(100vh-60px)]">
+=======
+      <div class="p-4 border-b" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
+        <h2 class="text-xl font-bold" :class="{ 'text-white': darkMode, 'text-gray-800': !darkMode }">
+          Messages
+        </h2>
+      </div>
+      
+      <div class="overflow-y-auto h-full">
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
         <div 
           v-for="conversation in conversations"
           :key="conversation.id"
@@ -64,6 +74,7 @@
     <div class="flex-1 flex flex-col">
       <div v-if="selectedConversation" class="flex-1 flex flex-col">
         <!-- En-tête -->
+<<<<<<< HEAD
         <div class="p-4 border-b flex items-center justify-between" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
           <div class="flex items-center">
             <img :src="currentConversation.user.avatar" class="h-10 w-10 rounded-full mr-3">
@@ -90,11 +101,26 @@
               </svg>
               <span class="tooltip">Vidéo</span>
             </button>
+=======
+        <div class="p-4 border-b flex items-center" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
+          <img :src="currentConversation.user.avatar" class="h-10 w-10 rounded-full mr-3">
+          <div>
+            <p class="font-medium" :class="{ 'text-white': darkMode, 'text-gray-900': !darkMode }">
+              {{ currentConversation.user.name }}
+            </p>
+            <p class="text-xs" :class="{ 'text-gray-400': darkMode, 'text-gray-500': !darkMode }">
+              En ligne
+            </p>
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
           </div>
         </div>
         
         <!-- Messages -->
+<<<<<<< HEAD
         <div class="flex-1 p-4 space-y-4">
+=======
+        <div class="flex-1 overflow-y-auto p-4 space-y-4">
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
           <div 
             v-for="message in currentConversation.messages"
             :key="message.id"
@@ -119,12 +145,17 @@
           </div>
         </div>
         
+<<<<<<< HEAD
         <!-- Input d'envoi - Position fixe en bas -->
         <div class="sticky bottom-0 p-4 border-t bg-opacity-90 backdrop-blur-sm" 
              :class="{ 
                'border-gray-700 bg-gray-900': darkMode, 
                'border-gray-200 bg-white': !darkMode 
              }">
+=======
+        <!-- Input d'envoi -->
+        <div class="p-4 border-t" :class="{ 'border-gray-700': darkMode, 'border-gray-200': !darkMode }">
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
           <div class="flex items-center">
             <input
               v-model="newMessage"
@@ -161,6 +192,7 @@
           <p class="mt-1 text-sm" :class="{ 'text-gray-400': darkMode, 'text-gray-500': !darkMode }">
             Ou commencez une nouvelle discussion
           </p>
+<<<<<<< HEAD
           <button
             @click="showNewMessageModal = true"
             class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition-colors"
@@ -207,6 +239,8 @@
               </div>
             </div>
           </div>
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
         </div>
       </div>
     </div>
@@ -225,6 +259,7 @@ export default {
     return {
       selectedConversation: null,
       newMessage: '',
+<<<<<<< HEAD
       showNewMessageModal: false,
       contacts: [
         {
@@ -246,6 +281,8 @@ export default {
           avatar: "https://randomuser.me/api/portraits/women/3.jpg"
         }
       ],
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       conversations: [
         {
           id: 1,
@@ -314,6 +351,15 @@ export default {
   methods: {
     selectConversation(id) {
       this.selectedConversation = id;
+<<<<<<< HEAD
+=======
+      // Marquer comme lu
+      const conversation = this.conversations.find(c => c.id === id);
+      if (conversation) {
+        // Mettre à jour le dernier message comme lu
+        // (vous pourriez avoir besoin d'une logique plus complexe selon vos besoins)
+      }
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
     },
     sendMessage() {
       if (!this.newMessage.trim() || !this.selectedConversation) return;
@@ -334,6 +380,7 @@ export default {
         };
         
         this.newMessage = '';
+<<<<<<< HEAD
       }
     },
     startNewConversation(contact) {
@@ -355,6 +402,20 @@ export default {
       this.showNewMessageModal = false;
     },
     formatTime(date) {
+=======
+        
+        // Faire défiler vers le bas
+        this.$nextTick(() => {
+          const container = this.$el.querySelector('.overflow-y-auto');
+          if (container) {
+            container.scrollTop = container.scrollHeight;
+          }
+        });
+      }
+    },
+    formatTime(date) {
+      // La même fonction que dans le composant Navbar
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       const now = new Date();
       const diff = now - date;
       
@@ -379,6 +440,7 @@ export default {
     }
   }
 };
+<<<<<<< HEAD
 </script>
 
 <style scoped>
@@ -393,3 +455,6 @@ export default {
   @apply opacity-100;
 }
 </style>
+=======
+</script>
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5

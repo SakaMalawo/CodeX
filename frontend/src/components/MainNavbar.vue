@@ -9,7 +9,10 @@
   >
     <!-- MOBILE NAVBAR -->
     <div class="flex w-full items-center justify-between md:hidden">
+<<<<<<< HEAD
       <!-- Burger menu -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       <button
         @click="toggleMobileMenu"
         class="p-2 rounded-md focus:outline-none"
@@ -24,7 +27,10 @@
         </svg>
       </button>
 
+<<<<<<< HEAD
       <!-- Logo + titre -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       <div class="flex items-center gap-2">
         <div class="relative w-10 h-10 flex items-center justify-center">
           <img src="/logoHay.png" alt="Logo HAY" class="w-full h-full object-contain" style="filter: drop-shadow(0 0 24px #38bdf8) drop-shadow(0 0 12px #38bdf8);" />
@@ -34,7 +40,10 @@
         </h1>
       </div>
 
+<<<<<<< HEAD
       <!-- Darkmode + Notifications + Messages -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       <div class="flex items-center gap-2">
         <button
           @click="$emit('toggle-dark-mode')"
@@ -52,6 +61,7 @@
           </svg>
         </button>
 
+<<<<<<< HEAD
         <!-- Notifications mobile -->
         <div class="relative">
           <button
@@ -75,6 +85,11 @@
         <div class="relative">
           <button
             @click.stop="toggleDropdown('messages')"
+=======
+        <div class="relative">
+          <button
+            @click.stop="navigateToMessages"
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
             class="p-1 rounded-full focus:outline-none relative hover:border hover:border-indigo-400"
             :class="{
               'text-gray-400 hover:text-white': darkMode,
@@ -94,7 +109,10 @@
 
     <!-- DESKTOP NAVBAR -->
     <div class="hidden md:flex w-full items-center">
+<<<<<<< HEAD
       <!-- Logo + titre -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       <div class="flex items-center gap-3 mr-4">
         <div class="relative w-12 h-12 flex items-center justify-center">
           <img src="/logoHay.png" alt="Logo HAY" class="w-full h-full object-contain" style="filter: drop-shadow(0 0 32px #38bdf8) drop-shadow(0 0 16px #38bdf8);" />
@@ -104,7 +122,10 @@
         </h1>
       </div>
 
+<<<<<<< HEAD
       <!-- Barre de recherche -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       <div class="flex-1 flex justify-center">
         <div class="relative w-full max-w-md">
           <input
@@ -133,9 +154,13 @@
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Actions droite -->
       <div class="flex items-center space-x-6 ml-4">
         <!-- Darkmode -->
+=======
+      <div class="flex items-center space-x-6 ml-4">
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
         <button
           @click="$emit('toggle-dark-mode')"
           class="p-2 rounded-full focus:outline-none hover:border hover:border-indigo-400"
@@ -152,6 +177,7 @@
           </svg>
         </button>
 
+<<<<<<< HEAD
         <!-- Notifications -->
         <div class="relative">
           <button
@@ -237,6 +263,8 @@
         </div>
 
         <!-- Messages -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
         <div class="relative">
           <button
             @click.stop="toggleDropdown('messages')"
@@ -254,7 +282,10 @@
             </span>
           </button>
 
+<<<<<<< HEAD
           <!-- Dropdown Messages -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
           <div
             v-show="activeDropdown === 'messages'"
             class="origin-top-right absolute right-0 mt-2 w-80 rounded-md shadow-lg z-50"
@@ -315,7 +346,10 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <!-- Profil -->
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
         <div class="relative">
           <button
             @click.stop="toggleDropdown('profile')"
@@ -358,6 +392,7 @@
           {{ unreadMessages.length }}
         </span>
       </button>
+<<<<<<< HEAD
       <button
         @click="toggleDropdown('notifications')"
         class="block py-2 w-full text-left"
@@ -368,6 +403,8 @@
           {{ unreadNotifications.length }}
         </span>
       </button>
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
     </div>
   </nav>
 </template>
@@ -408,6 +445,7 @@ export default {
           time: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
           read: false
         }
+<<<<<<< HEAD
       ],
       unreadNotifications: [
         {
@@ -442,6 +480,8 @@ export default {
           time: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
           read: false
         }
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
       ]
     };
   },
@@ -471,6 +511,7 @@ export default {
         this.navigateToMessages();
       }
     },
+<<<<<<< HEAD
     markNotificationAsRead(notificationId) {
       const notification = this.unreadNotifications.find(n => n.id === notificationId);
       if (notification && !notification.read) {
@@ -478,6 +519,8 @@ export default {
         this.closeDropdowns();
       }
     },
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
     navigateToMessages() {
       this.$router.push('/Message');
       this.closeDropdowns();
@@ -527,6 +570,7 @@ export default {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
+<<<<<<< HEAD
 
 /* Animation pour les notifications non lues */
 @keyframes pulse {
@@ -537,4 +581,6 @@ export default {
 .border-l-4 {
   animation: pulse 2s infinite;
 }
+=======
+>>>>>>> fa65a2ebc7d00b9e898d68f9e2381db78bb6e9e5
 </style>
